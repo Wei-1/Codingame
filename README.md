@@ -20,4 +20,8 @@ A ok bot that might make it to legend if lucky..
 
 So I only put the test-cases and evaluation functions
 
+## MM
+
+A ok bot that is purely heuristic.
+
 ### Note: Legend BOTs will not be posted here
