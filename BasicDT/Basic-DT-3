@@ -1,0 +1,88 @@
+You are a beetle scientist and have to identify the species of male beetles while they are still pupae.
+
+You had already done some researches:
+https://www.codingame.com/training/hard/basic-decision-tree---1
+https://www.codingame.com/training/hard/basic-decision-tree---2
+
+But before you submit the decision tree result to a Journal,
+a friend told you that you miss 2 important concepts.
+
+1. <<Depth>> of Decision Tree
+Always maximize the depth will cause overfitting.
+Decision tree should set a depth limit to prevent the tree from going too deep.
+
+2. <<Category>> Features
+Non-numerical features will normally need to be one-hot encoded.
+However, in the Decision Tree,
+we can simply change the decider to "Equal to" instead of "Smaller than" to classify category features.
+
+----
+
+There are 3 sets of pupae,
+1st is the <<training set>>, with {{TPN}} (Training Pupae Number) of pupae in the set.
+2nd is the <<validation set>>, with {{VPN}} (Validation Pupae Number) of pupae in the set.
+3rd is the <<real testing set>>, with {{RPN}} (Real testing Pupae Number) of pupae in the set.
+
+You have to train your decision tree model based on the <<training set>>,
+and validate if the model has over-fitting with the <<validation set>>.
+Keep changing the <<depth>> of the decision tree model until you find the best accuracy while validation.
+This process is called hyper-parameter tuning.
+
+After you had found the best <<depth>> with these 2 sets,
+you use the model and predict the <<real testing set>> to get the <<final accuracy>>!
+
+----
+
+This puzzle requires you to get the best <<depth>> and <<final accuracy>>!
+
+p.s. It is highly recommended to solve the previous 2 puzzles before starting this one.
+
+
+------------------------------------------------------------------------------------------------------------ INPUT
+
+
+<<Line 1>>: 4 space separated integers [[FN]], [[TPN]], [[VPN]], [[RPN]]
+[[FN]]: the number of features
+[[TPN]]: the number of pupae in the training set
+[[VPN]]: the number of pupae in the validation set
+[[RPN]]: the number of pupae in the real testing set
+
+Next [[FN]] lines: 2 space separated strings [[FeatureName]], [[FeatureType]]
+[[FeatureName]]: the name of the feature, no use in the puzzle
+[[FeatureType]]: can be either "category" or "numerical"
+
+Next [[TPN]] lines: 2+[[FN]] space separated integers [[ID]], [[SpeciesID]], <<features>>
+[[ID]]: the id of the pupa, no use in the puzzle
+[[SpeciesID]]: the id of the pupa's species
+<<features>>: [[FN]] features that are all integers
+
+Next [[VPN]] lines: 2+[[FN]] space separated integers [[ID]], [[SpeciesID]], <<features>>
+
+Next [[RPN]] lines: 2+[[FN]] space separated integers [[ID]], [[SpeciesID]], <<features>>
+
+
+------------------------------------------------------------------------------------------------------------ OUTPUT
+
+
+<<Line 1>>: [[DEPTH]]
+[[DEPTH]]: the best depth for the decision tree model trained with <<training set>> and validated with <<validation set>>
+
+<<Line 2>>: [[ACCURACY]]
+[[ACCURACY]]: the percentage of the prediction accuracy of the model with the <<real testing set>>.
+
+
+------------------------------------------------------------------------------------------------------------ CONSTRAINT
+
+
+1 <= [[FN]] <= 10
+1 <= [[TPN]], [[VPN]], [[RPN]] <= 100
+0 <= [[ID]] < 300
+2 <= [[SpeciesID]] <= 4
+0 <= <<feature>> <= 10000
+
+
+------------------------------------------------------------------------------------------------------------ EXAMPLE
+
+
+
+
