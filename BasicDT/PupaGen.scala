@@ -1,3 +1,5 @@
+package com.scalaml.cg
+
 class Feature(val n: String, val t: String, var std: Double = 1.0) {
     override def toString: String = n + " " + t
 }
@@ -15,6 +17,8 @@ object PupaGen extends App {
         }.toArray
     def getCenteri(centers: Array[(Int, Int, Array[Int])], f: Array[Int]): Int =
         centers.minBy { case (i, c, arr) =>
+            var balance = c.toDouble
+            f.foreach(_ => balance = Math.sqrt(balance))
             arr.zip(f).map { case (a, b) =>
                 (a - b).abs
             }.zip(fs).map { case (a, fi) =>
@@ -23,7 +27,7 @@ object PupaGen extends App {
                 } else {
                     a / fi.std
                 }
-            }.sum * Math.sqrt(Math.sqrt(c)) // Special weight to keep each group balance
+            }.sum * balance // Special weight to keep each group balance
         }._1
     def specialKMean(k: Int, fSet: Array[Array[Int]], limit: Int): Array[(Int, Array[Int])] = {
         var fSeti = fSet.zipWithIndex.map { case (f, i) => ((i % k) + 1, f) }
@@ -40,18 +44,26 @@ object PupaGen extends App {
         if(f.t == "category") {
             Math.random * 4
         } else {
-            val c = Math.pow(Math.random, 2) * 5000
+            val c = Math.pow(Math.random, 2) * 100
             Math.pow((Math.random - 0.5) * 2, 3) * c + c
         }
     }.map(_.toInt).toArray
 
-    val tpn = 10
-    val vpn = 10
-    val rpn = 10
-    val sn = 2
+    val tpn = 100
+    val vpn = 100
+    val rpn = 100
+    val sn = 4
     val fs = Array(
-        ("a", 1),
-        ("b", 1)
+        ("BodyWidth", 1),
+        ("BodyHight", 1),
+        ("BodyThick", 1),
+        ("BodyShape", 0),
+        ("BodyColor", 0),
+        ("HornSize", 1),
+        ("HornShape", 0),
+        ("HornColor", 0),
+        ("NestDepth", 1),
+        ("NestShape", 0)
     ).map { case (name, typei) =>
         new Feature(name, if(typei == 0) "category" else "numerical")
     }

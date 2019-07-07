@@ -26,6 +26,7 @@ There are 3 sets of pupae,
 You have to train your decision tree model based on the <<training set>>,
 and validate if the model has over-fitting with the <<validation set>>.
 Keep changing the <<depth>> of the decision tree model until you find the best accuracy while validation.
+When 2 <<depth>>s have the same accuracy for validation, choose the smaller depth.
 This process is called hyper-parameter tuning.
 
 After you had found the best <<depth>> with these 2 sets,
@@ -77,7 +78,7 @@ Next [[RPN]] lines: 2+[[FN]] space separated integers [[ID]], [[SpeciesID]], <<f
 1 <= [[FN]] <= 10
 1 <= [[TPN]], [[VPN]], [[RPN]] <= 100
 0 <= [[ID]] < 300
-2 <= [[SpeciesID]] <= 4
+1 <= [[SpeciesID]] <= 4
 0 <= <<feature>> <= 10000
 
 
